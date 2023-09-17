@@ -34,7 +34,7 @@ cmpn_num = cmpn[var_num]
 cmpn_key = cmpn[var_key]
 
 # Create a copy of cmpn to avoid modifying the original dataset
-df = cmpn_impute.copy()  # Copy of the dataset
+df = cmpn.copy() 
 
 # Convert the outcome variable to binary (0 or 1)
 df.loc[df.y == 'yes', "y_int"] = 1
@@ -45,24 +45,19 @@ df = df.drop(columns=['y', 'duration', 'date'])
 
 # One-hot encode categorical variables
 df2 = pd.get_dummies(df)
-
 X = df2[['age', 'contact_num', 'p_days', 'duration_mins',
-         # ... (list of feature names) ...
          'p_outcome_failure', 'p_outcome_nonexistent', 'p_outcome_success', 'p_outcome_unknown']]
-
 y = df2.y_int
 
 from sklearn.model_selection import train_test_split
-
 # Split the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=824)
 
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
-
 # Create a Decision Tree classifier object
-clf = DecisionTreeClassifier()  # Decision Tree classifier
+clf = DecisionTreeClassifier()
 
 # Train the Decision Tree classifier
 clf = clf.fit(X_train, y_train)
@@ -70,6 +65,5 @@ clf = clf.fit(X_train, y_train)
 # Predict the response for the test dataset
 y_pred = clf.predict(X_test)
 
-# Calculate and print the model accuracy
-print("Accuracy:", metrics.accuracy_score(y_test, y_pred))  # Model accuracy calculation
+print("Accuracy:", metrics.accuracy_score(y_test, y_pred))  # Model accuracy calculation, result is 0.8630735615440641
 
