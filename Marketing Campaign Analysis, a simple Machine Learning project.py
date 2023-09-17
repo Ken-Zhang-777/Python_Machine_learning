@@ -3,7 +3,7 @@ import sklearn
 import numpy as np
 
 # Load data from https://www.kaggle.com/datasets/muhammadshahidazeem/customer-churn-dataset
-cmpn = pd.read_csv('./data/customer_churn_dataset-testing-master.csv')
+cmpn = pd.read_csv('./data/customer_churn_dataset-training-master.csv')
 
 # Identify categorical ("object") and numerical variables
 var_char = cmpn.dtypes[cmpn.dtypes == 'object'].index.tolist()
